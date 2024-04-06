@@ -11,7 +11,7 @@ const app = express();
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.json());
 
-app.use(cors({ origin: 'https://meek-brioche-08c80c.netlify.app/' }));
+app.use(cors({ origin: 'https://shir-project.vercel.app' }));
 
 // Directory to store movie data
 const dataDirectory = '//DESKTOP-JODHRVA/Reviews';
