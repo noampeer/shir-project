@@ -1,10 +1,12 @@
 import React, { MouseEventHandler } from "react";
 import "./ReviewStyle.css"
+import YouTubePlayer from "../YoutubePlayer/YoutubePlayerComponent";
 
 export interface ReviewAttributes{
     description:string,
     name: string,
     rating: number
+    youtubeId: string
     onClose: any
 }
 
@@ -31,7 +33,9 @@ export const Review: React.FC<ReviewAttributes> = (ReviewAttributes) => {
                                 </span> 
                                 );
                             })}
+
                         </div>
+                        <YouTubePlayer videoId={ReviewAttributes.youtubeId}></YouTubePlayer>
                     </div>
             </center>
             <button className="close-button" onClick={ReviewAttributes.onClose}>X</button>

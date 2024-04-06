@@ -15,7 +15,7 @@ app.use(cors({ origin: 'https://shir-project.vercel.app' }));
 
 
 // Directory to store movie data
-const dataDirectory = '//DESKTOP-JODHRVA/Reviews';
+const dataDirectory = '../Reviews';
 
 // Create the directory if it doesn't exist
 if (!fs.existsSync(dataDirectory)) {
@@ -59,13 +59,13 @@ app.get('/movies', (req, res) => {
 // POST endpoint to save movie data as JSON
 app.post('/movies', (req, res) => {
   console.log(req)
-  const { name, description, rating, imageData } = req.body;
+  const { name, description, rating, youtubeId, source, imageData } = req.body;
   if (!name || !rating || !imageData) {
     return res.status(400).json({ error: 'Name, rating, and imageData are required' });
   }
 
   const filePath = path.join(dataDirectory, `${name}.json`);
-  const movieData = { name, rating, description, imageData };
+  const movieData = { name, rating, description, youtubeId, source, imageData };
 
   // Write movie data to a JSON file
   fs.writeFile(filePath, JSON.stringify(movieData), (err) => {

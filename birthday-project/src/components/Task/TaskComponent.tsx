@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Review } from "../Review/ReviewComponent";
 import "./TaskStyle.css"
+import YouTubePlayer from "../YoutubePlayer/YoutubePlayerComponent";
 
 interface TaskAttributes{
     movie: string
@@ -8,7 +9,7 @@ interface TaskAttributes{
 }
 
 export const Task: React.FC<TaskAttributes> = (TaskAttributes) => {
-  const [jsonData] = useState({ name: "", rating: "", description: "", imageData: "" });
+  const [jsonData] = useState({ name: "", rating: "", description: "", imageData: "", youtubeId: "", source:""});
   const [showPopup, setShowPopup] = useState(false);
   const [rating, setRating] = useState(Number(localStorage.getItem("rating" + TaskAttributes.movie)));
   const [isWatched, setIsWatched] = useState(localStorage.getItem('isWatched' + TaskAttributes.movie) === 'true');
@@ -23,10 +24,14 @@ export const Task: React.FC<TaskAttributes> = (TaskAttributes) => {
           throw new Error('Failed to fetch data');
         }
         const data = await response.json();
+
         jsonData.name = data["name"];
         jsonData.description = data["description"];
         jsonData.imageData = data["imageData"];
         jsonData.rating = data["rating"];
+        jsonData.youtubeId = data["youtubeId"];
+        jsonData.source = data["source"];
+
         setShowImage(true)
         console.log(jsonData)
       } catch (error) {
@@ -54,7 +59,9 @@ export const Task: React.FC<TaskAttributes> = (TaskAttributes) => {
     <center>
         <div className="task">
         <p className="title">{TaskAttributes.movie}</p>
-        <button type="button" className="reviewButton" onClick={handlePopUp}>Review</button>
+        <a className="source" href={jsonData.source}>Source</a>
+        <button type="button" className="reviewButton" onClick={handlePopUp}>ביקורת פירון</button>
+        <br />
         <button type="button" className="status" onClick={() => setIsWatched(!isWatched)}>{isWatched ? '😊' : '😢'}</button>
         {[...Array(5)].map((_, index)=> {
                                 const ratingValue = index + 1;
@@ -69,9 +76,12 @@ export const Task: React.FC<TaskAttributes> = (TaskAttributes) => {
                                 </span>
                                 );
                             })}
+        <br />
+        <br />
         <img className="image" src={jsonData["imageData"]}></img>
+        
         </div>
-        {showPopup && <Review name={jsonData.name} description={jsonData.description} rating={Number(jsonData.rating)} onClose={handlePopUp}/>}
+        {showPopup && <Review name={jsonData.name} description={jsonData.description} rating={Number(jsonData.rating)} youtubeId={jsonData.youtubeId} onClose={handlePopUp}/>}
     </center>
 
   );

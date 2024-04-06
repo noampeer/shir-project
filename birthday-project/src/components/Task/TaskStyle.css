@@ -4,31 +4,33 @@
     border: solid black 0.5vh;
     background-color: rgb(238, 240, 245);
     transition: background-color 1s ease;
-    width: 50vh;
+    width: 40vh;
     height: fit-content;
-    width: fit-content;
+    border-radius: 5vh;
 }
 
 .reviewButton{
-    width: 10vh;
-    height: 3vh;
+    color: black;
+    background-color: aliceblue;
+    border: 0.3vh solid black;
     font-size: 2vh;
     font-weight: bold;
     border-radius: 10vh;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 10vh;
+    padding: 0.5vh;
+    margin: 0.5vh;
 }
 
 .reviewButton:hover{
-    width: 10vh;
-    height: 3vh;
+    color: blue;
     font-weight: bold;
-    
-    border-radius: 10vh;
-    background-color: aliceblue;
 }
 
 .title{
+    word-wrap: break-word;
     font-size: 3vh;
-    height: 1vh;
     font-weight: bold;
 }
 
@@ -40,5 +42,25 @@
 
 .image{
     width: 90%;
-    height: 15vh;
+    max-height: 20vh;
+}
+
+.source{
+    color: black;
+    background-color: aliceblue;
+    border: 0.3vh solid black;
+    font-size: 2vh;
+    font-weight: bold;
+    border-radius: 10vh;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 10vh;
+    padding: 0.5vh;
+    margin: 0.5vh;
+}
+
+.source:hover{
+    color: blue;
+    background-color: aliceblue;
+    font-weight: bold;
 }

@@ -5,10 +5,20 @@ export const RegistrationPage : React.FC = () => {
     const [name, setName] = useState<string>('');
     const [rating, setRating] = useState<number>(1);
     const [description, setDescription] = useState<string>('');
+    const [youtubeId, setYoutubeId] = useState<string>('');
+    const [source, setSource] = useState<string>('');
     const [image, setImage] = useState<File | null>(null);
 
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
+    };
+
+    const handleSourceChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setSource(event.target.value);
+    };
+
+    const handleYoutubeIdChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setYoutubeId(event.target.value);
     };
 
     const handleDescriptionChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -37,6 +47,8 @@ export const RegistrationPage : React.FC = () => {
                     name,
                     description,
                     rating,
+                    youtubeId,
+                    source,
                     imageData: base64Image
                 };
                 sendRegistrationData(payload);
@@ -50,7 +62,7 @@ export const RegistrationPage : React.FC = () => {
             const payloadSizeInBytes = JSON.stringify(payload).length * 2;
             console.log(`Payload size: ${payloadSizeInBytes} bytes`);
 
-            const response = await fetch('http://192.168.1.176:4000/movies', {
+            const response = await fetch('https://192.168.1.176:3443/movies', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -77,12 +89,20 @@ export const RegistrationPage : React.FC = () => {
                     <input id="name" type="text" value={name} onChange={handleNameChange} required className="input" />
                 </div>
                 <div className="form-line">
+                    <label htmlFor="source" className="label">Source:</label>
+                    <input id="source" type="text" value={source} onChange={handleSourceChange} required className="input" />
+                </div>
+                <div className="form-line">
                     <label htmlFor="description" className="label">Description:</label>
                     <textarea id="description" value={description} onChange={handleDescriptionChange} required className="textarea" />
                 </div>
                 <div className="form-line">
                     <label htmlFor="image" className="label">Image:</label>
                     <input id="image" type="file" accept="image/*" onChange={handleImageChange} required className="input" />
+                </div>
+                <div className="form-line">
+                    <label htmlFor="youtubeId" className="label">Youtube id:</label>
+                    <input id="youtubeId" type="text" onChange={handleYoutubeIdChange} required className="input" />
                 </div>
                 <div className="form-line">
                     <label className="label">Rating:</label>
