@@ -2,14 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
-const cors = require('cors')
+const cors = require('cors');
+const https = require('https');
+const http = require('http');
 
 const app = express();
 
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.json());
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: 'https://meek-brioche-08c80c.netlify.app/' }));
 
 // Directory to store movie data
 const dataDirectory = '//DESKTOP-JODHRVA/Reviews';
@@ -73,7 +75,9 @@ app.post('/movies', (req, res) => {
   });
 });
 
-// Start the server
-app.listen(4000, () => {
-  console.log(`Server is running on port 4000`);
-});
+const httpsServer = https.createServer({
+  key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
+  cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
+},app);
+
+httpsServer.listen(3443, () => console.log('open on port 3443'));

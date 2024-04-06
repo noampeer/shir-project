@@ -6,7 +6,7 @@ export const MovieTaskList: React.FC = () => {
     useEffect(() => {
         const fetchMovies = async () =>{
             try {
-                const response = await fetch('http://192.168.1.176:4000/movies');
+                const response = await fetch('https://192.168.1.176:3443/movies');
                 console.log(response)
                 if (response.ok) {
                     console.log('Registration successful');
