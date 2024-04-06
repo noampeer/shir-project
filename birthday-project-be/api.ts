@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 app.use(cors({ origin: 'https://shir-project.vercel.app' }));
 
+
 // Directory to store movie data
 const dataDirectory = '//DESKTOP-JODHRVA/Reviews';
 
