@@ -17,6 +17,7 @@ export const Task: React.FC<TaskAttributes> = (TaskAttributes) => {
   useEffect(() => {
     const fetchJsonData = async () => {
       try {
+        console.log('https://192.168.1.176:3443/movies/' + TaskAttributes.movie)
         const response = await fetch('https://192.168.1.176:3443/movies/' + TaskAttributes.movie);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
