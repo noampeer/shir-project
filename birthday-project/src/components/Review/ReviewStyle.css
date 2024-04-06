@@ -1,0 +1,66 @@
+.description{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2vh;
+}
+
+.popup{
+    position: fixed; /* Fixed positioning to keep the overlay in place */
+    top: 0; /* Position at the top of the viewport */
+    left: 0; /* Position at the left of the viewport */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    z-index: 9999; /* Ensure the overlay appears on top of other content */
+    display: flex; /* Center content horizontally and vertically */
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.2s ease-in-out forwards; /* Apply the fade-in animation */
+}
+
+.reviewBlock{
+    border-top: 0.1vh solid;
+    border-bottom: 0.3vh black solid;
+    border-left: 0.3vh black solid;
+    border-right: 0.3vh black solid;
+    border-radius: 5vh;
+    background-color: rgb(255, 100, 150);
+    transition: background-color 1s ease;
+    overflow: hidden; 
+    padding: 1vh;
+    cursor: default;
+    width: fit-content;
+}
+
+.reviewHeader{
+    font-weight: bold;
+    font-size: 5vh;
+}
+.stars{
+    font-size: 5vh;
+}
+
+.close-button{
+    position: fixed; /* Position the container relative to the viewport */
+    top: 1vh;
+    cursor: pointer;
+    transform: translateY(-50%); /* Adjust vertically to center */
+    right: 0vh; /* Distance from the right edge of the viewport */
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+@keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
