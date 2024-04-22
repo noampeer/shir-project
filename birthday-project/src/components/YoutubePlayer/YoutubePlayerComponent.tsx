@@ -7,8 +7,6 @@ interface YouTubePlayerAttributes{
 
 export const YouTubePlayer: React.FC<YouTubePlayerAttributes> = ( YouTubePlayerAttributes ) => {
     return (
-        <>
-        <h4>טריילר</h4>
         <div className="video-container">
             <iframe 
                 width="100%"
@@ -19,7 +17,6 @@ export const YouTubePlayer: React.FC<YouTubePlayerAttributes> = ( YouTubePlayerA
                 allowFullScreen
             ></iframe>
         </div>
-        </> 
     );
 }
 

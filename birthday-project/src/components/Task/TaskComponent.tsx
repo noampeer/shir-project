@@ -59,10 +59,10 @@ export const Task: React.FC<TaskAttributes> = (TaskAttributes) => {
     <center>
         <div className="task">
         <p className="title">{TaskAttributes.movie}</p>
-        <a className="source" href={jsonData.source}>Source</a>
-        <button type="button" className="reviewButton" onClick={handlePopUp}>ביקורת פירון</button>
+        <a className="source" href={jsonData.source}>לצפייה</a>
+        <button type="button" className="reviewButton" onClick={handlePopUp}>פרטים</button>
         <br />
-        <button type="button" className="status" onClick={() => setIsWatched(!isWatched)}>{isWatched ? '😊' : '😢'}</button>
+        <button type="button" className="status" onClick={() => setIsWatched(!isWatched)} style={{color: isWatched ? 'green' : 'red'}}>{isWatched ? '✔' : '✖'}</button>
         {[...Array(5)].map((_, index)=> {
                                 const ratingValue = index + 1;
                                 return (
@@ -70,7 +70,13 @@ export const Task: React.FC<TaskAttributes> = (TaskAttributes) => {
                                     className="stars"
                                     key={ratingValue}
                                     onClick={() => {setRating(ratingValue); localStorage.setItem("rating" + TaskAttributes.movie, String(ratingValue));}}
-                                    style={{color: ratingValue <= Number(rating) ? 'gold' : 'grey', cursor:"pointer"}}
+                                    onTouchStart={() => { setRating(ratingValue); localStorage.setItem("rating" + TaskAttributes.movie, String(ratingValue)); }} // onTouchStart event to handle touch interactions on mobile devices
+                                    style={{
+                                        color: ratingValue <= Number(rating) ? 'gold' : 'grey',
+                                        cursor: "pointer",
+                                        transition: "color 0.3s", // Transition for color change
+                                        WebkitTapHighlightColor: "transparent", // Disable tap highlight on mobile
+                                    }}
                                 >
                                     ★
                                 </span>

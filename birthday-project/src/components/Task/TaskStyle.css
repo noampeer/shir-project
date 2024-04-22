@@ -6,38 +6,54 @@
     transition: background-color 1s ease;
     width: 40vh;
     height: fit-content;
-    border-radius: 5vh;
+    border-radius: 2vh;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent; /* For WebKit browsers */
+}
+
+a {
+    -webkit-tap-highlight-color: transparent; /* For WebKit browsers */
 }
 
 .reviewButton{
+    font-family: Arial, Helvetica, sans-serif;
     color: black;
     background-color: aliceblue;
-    border: 0.3vh solid black;
+    border: 0.2vh solid black;
     font-size: 2vh;
-    font-weight: bold;
     border-radius: 10vh;
     cursor: pointer;
-    font-weight: bold;
     border-radius: 10vh;
     padding: 0.5vh;
     margin: 0.5vh;
+    height: fit-content;
 }
 
 .reviewButton:hover{
-    color: blue;
-    font-weight: bold;
+    transition-property: background-color; /* Specifies the property to which a transition effect should be applied */
+    transition-duration: 0.3s; /* Specifies the duration of the transition effect */
+    background-color: rgb(201, 198, 198);
 }
 
 .title{
     word-wrap: break-word;
     font-size: 3vh;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .status{
     margin-right: 0;
     font-size: 3vh;
-    border: none;
+    background-color: rgb(231, 226, 230);
+    border: 0.1vh solid rgb(197, 194, 194);
+    border-radius: 1vh;
+    align-items: center;
+}
+
+.status:hover{
+    cursor: pointer;
 }
 
 .image{
@@ -46,21 +62,21 @@
 }
 
 .source{
+    font-family: Arial, Helvetica, sans-serif;
     color: black;
     background-color: aliceblue;
-    border: 0.3vh solid black;
+    border: 0.2vh solid black;
     font-size: 2vh;
-    font-weight: bold;
     border-radius: 10vh;
     cursor: pointer;
-    font-weight: bold;
     border-radius: 10vh;
     padding: 0.5vh;
     margin: 0.5vh;
 }
 
 .source:hover{
-    color: blue;
-    background-color: aliceblue;
-    font-weight: bold;
+    transition-property: background-color; /* Specifies the property to which a transition effect should be applied */
+    transition-duration: 0.3s; /* Specifies the duration of the transition effect */
+    background-color: rgb(201, 198, 198);
+    background-color: rgb(201, 198, 198);
 }

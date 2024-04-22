@@ -20,7 +20,6 @@ export const Review: React.FC<ReviewAttributes> = (ReviewAttributes) => {
                             <p className="description">{ReviewAttributes.description}</p>
                         </div>
                         <div className="body">
-                            <br />
                             {[...Array(5)].map((_, index)=> {
                                 const ratingValue = index + 1;
                                 return (

@@ -28,6 +28,8 @@
   transition: background-color 1s ease;
   padding: 1vh;
   cursor: default;
+  width: 50vh;
+  max-width: 80%;
 }
 
 .reviewHeader{
@@ -43,11 +45,11 @@
 
 .close-button{
     position: fixed; /* Position the container relative to the viewport */
-    top: 1.5vh;
+    top: 2vh;
     cursor: pointer;
     transform: translateY(-50%); /* Adjust vertically to center */
-    right: 0vh; /* Distance from the right edge of the viewport */
-    font-size: 3vh;
+    right: 0.5vh; /* Distance from the right edge of the viewport */
+    font-size: 2vh;
 }
 
 @keyframes fadeIn {
