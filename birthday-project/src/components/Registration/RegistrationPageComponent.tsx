@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import "./RegistrationPageStyle.css"
+import { IP_ADDRESS } from '../../consts';
 
 export const RegistrationPage : React.FC = () => {
     const [name, setName] = useState<string>('');
@@ -62,7 +63,7 @@ export const RegistrationPage : React.FC = () => {
             const payloadSizeInBytes = JSON.stringify(payload).length * 2;
             console.log(`Payload size: ${payloadSizeInBytes} bytes`);
 
-            const response = await fetch('https://192.168.1.176:3443/movies', {
+            const response = await fetch('https://' + IP_ADDRESS + ':3443/movies', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
