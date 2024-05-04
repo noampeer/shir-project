@@ -4,7 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const https = require('https');
-const http = require('http');
+const httpMiddleware = require('http-proxy-middleware')
+
 
 const app = express();
 
@@ -13,7 +14,6 @@ app.use(bodyParser.json());
 
 // app.use(cors({ origin: 'https://shir-project.vercel.app' }));
 app.use(cors({ origin: 'http://localhost:3000' }));
-
 
 // Directory to store movie data
 const dataDirectory = '../Reviews';
@@ -78,8 +78,8 @@ app.post('/movies', (req, res) => {
 });
 
 const httpsServer = https.createServer({
-  key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
-  cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
+  key: fs.readFileSync(path.join(__dirname, 'cert-new', 'cert-key.pem')),
+  cert: fs.readFileSync(path.join(__dirname, 'cert-new', 'cert.pem'))
 },app);
 
 httpsServer.listen(3443, () => console.log('open on port 3443'));
