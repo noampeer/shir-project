@@ -12,8 +12,8 @@ const app = express();
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.json());
 
-// app.use(cors({ origin: 'https://shir-project.vercel.app' }));
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: 'https://shir-project.vercel.app' }));
+// app.use(cors({ origin: 'http://localhost:3000' }));
 
 // Directory to store movie data
 const dataDirectory = '../Reviews';

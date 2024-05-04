@@ -66,7 +66,7 @@ export const Task: React.FC<TaskAttributes> = (TaskAttributes) => {
         {[...Array(5)].map((_, index)=> {
                                 const ratingValue = index + 1;
                                 return (
-                                <span
+                                <button
                                     className="stars"
                                     key={ratingValue}
                                     onClick={() => {setRating(ratingValue); localStorage.setItem("rating" + TaskAttributes.movie, String(ratingValue));}}
@@ -79,7 +79,7 @@ export const Task: React.FC<TaskAttributes> = (TaskAttributes) => {
                                     }}
                                 >
                                     ★
-                                </span>
+                                </button>
                                 );
                             })}
         <br />

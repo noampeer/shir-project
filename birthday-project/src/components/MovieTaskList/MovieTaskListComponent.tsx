@@ -15,6 +15,7 @@ export const MovieTaskList: React.FC = () => {
                     setMovies(jsonResponse)
                 } else {
                     console.error('Registration failed');
+                    return <a href={'https://' + IP_ADDRESS + ':3443/movies'} target="_blank">click the link to allow the movies server</a>
                 }
             } catch (error) {
                 console.error('Error:', error);

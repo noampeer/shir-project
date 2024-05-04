@@ -1,1 +1,30 @@
+# Node modules
+birhday-project-be/node_modules/
+node_modules/
+
+# Compiled output
+dist/
+build/
+
+# Environment variables
+.env
+
+# Dependency lock files
+yarn.lock
+package-lock.json
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+logs
+*.log
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
 Reviews
