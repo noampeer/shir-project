@@ -17,7 +17,7 @@ export const Review: React.FC<ReviewAttributes> = (ReviewAttributes) => {
                     <div className="reviewBlock">
                         <div className="head">
                             <p className="reviewHeader">{ReviewAttributes.name}</p>
-                            <p className="description">{ReviewAttributes.description}</p>
+                            <p dir="rtl" className="description">{ReviewAttributes.description}</p>
                         </div>
                         <div className="body">
                             {[...Array(5)].map((_, index)=> {
