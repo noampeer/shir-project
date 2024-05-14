@@ -1,12 +1,61 @@
-.task{
-    margin: 1vh;
-    padding: 1vh;
+.task {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    margin: 0.5vh;
     border: solid black 0.5vh;
     background-color: rgb(238, 240, 245);
     transition: background-color 1s ease;
-    width: 40vh;
-    height: fit-content;
+    padding: 1vh;
     border-radius: 2vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Distribute space between items */
+    width: calc(100%); /* Adjust the width considering the image width and margins */
+    margin-left: 20px; /* Space between image and text content */
+}
+
+.title {
+    font-size: 1em;
+    margin-bottom: 0.5vh; /* Adjust spacing as needed */
+    text-align: left; /* Align the title to the left */
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center; /* Align items horizontally */
+    margin-bottom: 0.4vh; /* Adjust spacing as needed */
+}
+
+.stars-container {
+    display: flex;
+    align-items: center; /* Align stars horizontally */
+    margin-left: 0.5vh; /* Adjust spacing as needed */
+}
+
+button, .source {
+    margin-right: 0.5vh; /* Adjust spacing between buttons */
+    margin-bottom: 0; /* Remove bottom margin for buttons */
+}
+
+.stars {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    margin: 0 5px; /* Adjust spacing as needed */
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.3s; /* Transition for color change */
+    -webkit-tap-highlight-color: transparent; /* Disable tap highlight on mobile */
+}
+
+.image {
+    border: 0.5vh solid rgb(226, 225, 225);
+    border-radius: 2vh;
+    width: 20vh;
+    height: 15vh;
 }
 
 button {
@@ -17,69 +66,64 @@ a {
     -webkit-tap-highlight-color: transparent; /* For WebKit browsers */
 }
 
-.reviewButton{
+.reviewButton {
     font-family: Arial, Helvetica, sans-serif;
     color: black;
     background-color: aliceblue;
     border: 0.2vh solid black;
     font-size: 2vh;
-    border-radius: 10vh;
     cursor: pointer;
-    border-radius: 10vh;
-    padding: 0.5vh;
-    margin: 0.5vh;
-    height: fit-content;
+    border-radius: 0.3vh;
+    height: 4.1vh;
 }
 
-.reviewButton:hover{
+.reviewButton:hover {
     transition-property: background-color; /* Specifies the property to which a transition effect should be applied */
     transition-duration: 0.3s; /* Specifies the duration of the transition effect */
     background-color: rgb(201, 198, 198);
 }
 
-.title{
+.title {
     word-wrap: break-word;
-    font-size: 3.5vh;
+    font-size: 1.5em;
+    text-align: left; /* Align the title to the left */
 }
 
-.status{
-    margin-right: 0;
+.status {
     font-size: 3vh;
     background-color: rgb(231, 226, 230);
     border: 0.1vh solid rgb(197, 194, 194);
-    border-radius: 1vh;
     align-items: center;
-}
-
-.status:hover{
+    justify-content: center;
+    height: 4.1vh;
     cursor: pointer;
 }
 
-.image{
-    width: 90%;
-    max-height: 20vh;
-    border-radius: 0.5vh;
+.status:hover {
+    cursor: pointer;
 }
 
-.source{
+.source {
     font-family: Arial, Helvetica, sans-serif;
-    color: black;
-    background-color: aliceblue;
+    color: white;
+    background-color: rgb(229, 192, 214);
     border: 0.2vh solid black;
+    border-radius: 10vh;
+    align-items: center;
     font-size: 2vh;
-    border-radius: 10vh;
     cursor: pointer;
-    border-radius: 10vh;
-    padding: 0.5vh;
-    margin: 0.5vh;
+    padding: 1vh;
 }
 
-.source:hover{
+.source:hover {
     transition-property: background-color; /* Specifies the property to which a transition effect should be applied */
     transition-duration: 0.3s; /* Specifies the duration of the transition effect */
     background-color: rgb(201, 198, 198);
-    background-color: rgb(201, 198, 198);
 }
-.stars{
-    border:none
+
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 100%; /* Adjust width to fit the entire screen on mobile */
+        margin-left: 0; /* Remove the left margin on mobile */
+    }
 }
