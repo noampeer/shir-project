@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const https = require('https');
-const httpMiddleware = require('http-proxy-middleware')
 
 
 const app = express();
@@ -12,25 +11,37 @@ const app = express();
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.json());
 
-app.use(cors({ origin: 'https://shir-project.vercel.app' }));
+// app.use(cors({ origin: 'https://shir-project.vercel.app' }));
 // app.use(cors({ origin: 'http://localhost:3000' }));
 
-// Directory to store movie data
+const allowedOrigins = ['http://localhost:3000', 'https://shir-project.vercel.app'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 const dataDirectory = '../Reviews';
 
-// Create the directory if it doesn't exist
 if (!fs.existsSync(dataDirectory)) {
   fs.mkdirSync(dataDirectory);
 }
 
-// GET endpoint to retrieve movie data by name
 app.get('/movies/:name', (req, res) => {
   const movieName = req.params.name;
   const filePath = path.join(dataDirectory, `${movieName}.json`);
 
-  // Check if the file exists
   if (fs.existsSync(filePath)) {
-    // Read the file and send its contents as response
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
         return res.status(500).json({ error: 'Internal server error' });
@@ -57,7 +68,6 @@ app.get('/movies', (req, res) => {
 });
 })
 
-// POST endpoint to save movie data as JSON
 app.post('/movies', (req, res) => {
   console.log(req)
   const { name, description, rating, youtubeId, source, imageData } = req.body;
@@ -68,7 +78,6 @@ app.post('/movies', (req, res) => {
   const filePath = path.join(dataDirectory, `${name}.json`);
   const movieData = { name, rating, description, youtubeId, source, imageData };
 
-  // Write movie data to a JSON file
   fs.writeFile(filePath, JSON.stringify(movieData), (err) => {
     if (err) {
       return res.status(500).json({ error: 'Failed to save movie data' });
