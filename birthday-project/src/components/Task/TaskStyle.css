@@ -39,8 +39,7 @@ a {
 
 .title{
     word-wrap: break-word;
-    font-size: 3vh;
-    font-weight: 500;
+    font-size: 3.5vh;
 }
 
 .status{
@@ -59,6 +58,7 @@ a {
 .image{
     width: 90%;
     max-height: 20vh;
+    border-radius: 0.5vh;
 }
 
 .source{

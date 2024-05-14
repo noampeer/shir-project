@@ -82,8 +82,6 @@ export const Task: React.FC<TaskAttributes> = (TaskAttributes) => {
                                 </button>
                                 );
                             })}
-        <br />
-        <br />
         <img className="image" src={jsonData["imageData"]}></img>
         
         </div>
