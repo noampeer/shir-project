@@ -5,7 +5,7 @@ import YouTubePlayer from "../YoutubePlayer/YoutubePlayerComponent";
 
 interface TaskAttributes{
     movie: string
-    
+    movieJsonData: any
 }
 
 export const Task: React.FC<TaskAttributes> = (TaskAttributes) => {
@@ -18,22 +18,14 @@ export const Task: React.FC<TaskAttributes> = (TaskAttributes) => {
   useEffect(() => {
     const fetchJsonData = async () => {
       try {
-        console.log('https://192.168.1.176:3443/movies/' + TaskAttributes.movie)
-        const response = await fetch('https://192.168.1.176:3443/movies/' + TaskAttributes.movie);
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-
-        jsonData.name = data["name"];
-        jsonData.description = data["description"];
-        jsonData.imageData = data["imageData"];
-        jsonData.rating = data["rating"];
-        jsonData.youtubeId = data["youtubeId"];
-        jsonData.source = data["source"];
+        jsonData.name = TaskAttributes.movieJsonData["name"];
+        jsonData.description = TaskAttributes.movieJsonData["description"];
+        jsonData.imageData = TaskAttributes.movieJsonData["imageData"];
+        jsonData.rating = TaskAttributes.movieJsonData["rating"];
+        jsonData.youtubeId = TaskAttributes.movieJsonData["youtubeId"];
+        jsonData.source = TaskAttributes.movieJsonData["source"];
 
         setShowImage(true)
-        console.log(jsonData)
       } catch (error) {
         console.error('Error fetching data:', error);
       }

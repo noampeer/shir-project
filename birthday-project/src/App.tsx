@@ -13,10 +13,10 @@ function App() {
           <nav>
             <ul>
               <li>
-                <Link to="/">סרטים</Link>
+                <Link to="/">סרטים וסדרות</Link>
               </li>
               <li>
-                <Link to="/register">רישום סרטים חדשים</Link>
+                <Link to="/register">רישום סרט או סדרה חדשים</Link>
               </li>
             </ul>
           </nav>
