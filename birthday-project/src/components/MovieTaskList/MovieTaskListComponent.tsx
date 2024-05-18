@@ -69,9 +69,11 @@ export const MovieTaskList: React.FC = () => {
 
     return (
         <div>
+            <center>
             {movies.map((movie, index) => (
                 <Task key={index} movie={movie.movie} movieJsonData={movie.data}></Task>
             ))}
+            </center>
         </div>
     );
 };
