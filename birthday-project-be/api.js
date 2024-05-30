@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const https = require('https');
+const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { MongoClient } = require('mongodb');
@@ -49,6 +49,7 @@ async function run() {
         const movie = await moviesCollection.findOne({ name: movieName });
         if (movie) {
           res.json(movie);
+          console.log("Sent response with movies")
         } else {
           res.status(404).json({ error: 'Movie not found' });
         }
@@ -76,18 +77,15 @@ async function run() {
       const movieData = { name, rating, description, youtubeId, source, imageData };
       try {
         await moviesCollection.insertOne(movieData);
+        console.log("Movie data saved successfully")
         res.status(201).json({ message: 'Movie data saved successfully' });
       } catch (err) {
         res.status(500).json({ error: 'Failed to save movie data' });
       }
     });
-
-    const httpsServer = https.createServer({
-      key: fs.readFileSync(path.join(__dirname, 'cert', 'cert-key.pem')),
-      cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
-    }, app);
-
-    httpsServer.listen(3443, () => console.log('Server open on port 3443'));
+    
+    const server = http.createServer(app)
+    server.listen(5000, () => console.log('Server open on port 5000'));
 
   } catch (err) {
     console.error(err);
