@@ -1,2 +1,1 @@
-export const HOST = "localhost";
-export const PORT = "5000";
+export const HOST = "https://shir-project.onrender.com";

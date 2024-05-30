@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import "./RegistrationPageStyle.css"
-import { HOST, PORT } from '../../consts';
+import { HOST } from '../../consts';
 
 export const RegistrationPage : React.FC = () => {
     const [name, setName] = useState<string>('');
@@ -63,7 +63,7 @@ export const RegistrationPage : React.FC = () => {
             const payloadSizeInBytes = JSON.stringify(payload).length * 2;
             console.log(`Payload size: ${payloadSizeInBytes} bytes`);
 
-            const response = await fetch(`https://${HOST}:${PORT}/movies`, {
+            const response = await fetch(`${HOST}/movies`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { HOST, PORT } from '../../consts';
+import { HOST } from '../../consts';
 import { Task } from '../Task/TaskComponent';
 
 export const MovieTaskList: React.FC = () => {
@@ -8,7 +8,7 @@ export const MovieTaskList: React.FC = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = await fetch(`https://${HOST}:${PORT}/movies`);
+                const response = await fetch(`${HOST}/movies`);
 
                 if (response.ok) {
                     const jsonResponse = await response.json();
@@ -23,7 +23,7 @@ export const MovieTaskList: React.FC = () => {
 
         const fetchData = async (movie: string) => {
             try {
-                const response = await fetch(`https://${HOST}:${PORT}/movies/${movie}`);
+                const response = await fetch(`${HOST}/movies/${movie}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }
