@@ -2,8 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const http = require('http');
-const fs = require('fs');
-const path = require('path');
 const { MongoClient } = require('mongodb');
 
 // MongoDB connection URI and database name
@@ -15,7 +13,7 @@ const app = express();
 
 app.use(bodyParser.json({ limit: '20mb' }));
 
-const allowedOrigins = ['http://localhost:3000', 'https://shir-project.vercel.app'];
+const allowedOrigins = ['https://shir-project.vercel.app'];
 
 const corsOptions = {
   origin: function (origin, callback) {
