@@ -14,7 +14,7 @@ const app = express();
 
 app.use(bodyParser.json({ limit: '20mb' }));
 
-const allowedOrigins = ['https://shir-project.vercel.app'];
+const allowedOrigins = ['http://localhost:3000'];
 
 const corsOptions = {
   origin: function (origin, callback) {
