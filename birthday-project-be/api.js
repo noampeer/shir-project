@@ -1,18 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require('fs');
-const path = require('path');
 const cors = require('cors');
 const https = require('https');
+const fs = require('fs');
+const path = require('path');
+const { MongoClient } = require('mongodb');
 
+// MongoDB connection URI and database name
+const mongoURI = 'mongodb+srv://noampeer23:noam23012004@shir-mongo.2gsqx2i.mongodb.net/?retryWrites=true&w=majority&appName=shir-mongo';
+const dbName = 'Movie-Information';
 
+// Initialize Express app
 const app = express();
 
 app.use(bodyParser.json({ limit: '20mb' }));
-app.use(bodyParser.json());
-
-// app.use(cors({ origin: 'https://shir-project.vercel.app' }));
-// app.use(cors({ origin: 'http://localhost:3000' }));
 
 const allowedOrigins = ['http://localhost:3000', 'https://shir-project.vercel.app'];
 
@@ -31,64 +32,66 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-const dataDirectory = '../Reviews';
+// Create a new MongoClient
+const client = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-if (!fs.existsSync(dataDirectory)) {
-  fs.mkdirSync(dataDirectory);
+async function run() {
+  try {
+    // Connect to the MongoDB cluster
+    await client.connect();
+    console.log('Connected to MongoDB');
+    const db = client.db(dbName);
+    const moviesCollection = db.collection('Movie');
+
+    app.get('/movies/:name', async (req, res) => {
+      const movieName = req.params.name;
+      try {
+        const movie = await moviesCollection.findOne({ name: movieName });
+        if (movie) {
+          res.json(movie);
+        } else {
+          res.status(404).json({ error: 'Movie not found' });
+        }
+      } catch (err) {
+        res.status(500).json({ error: 'Internal server error' });
+      }
+    });
+
+    app.get('/movies', async (req, res) => {
+      try {
+        const movies = await moviesCollection.find({}).project({ name: 1, _id: 0 }).toArray();
+        const movieNames = movies.map(movie => movie.name);
+        res.json(movieNames);
+      } catch (err) {
+        res.status(500).send('Internal Server Error');
+      }
+    });
+
+    app.post('/movies', async (req, res) => {
+      const { name, description, rating, youtubeId, source, imageData } = req.body;
+      if (!name || !rating || !imageData) {
+        return res.status(400).json({ error: 'Name, rating, and imageData are required' });
+      }
+
+      const movieData = { name, rating, description, youtubeId, source, imageData };
+      try {
+        await moviesCollection.insertOne(movieData);
+        res.status(201).json({ message: 'Movie data saved successfully' });
+      } catch (err) {
+        res.status(500).json({ error: 'Failed to save movie data' });
+      }
+    });
+
+    const httpsServer = https.createServer({
+      key: fs.readFileSync(path.join(__dirname, 'cert', 'cert-key.pem')),
+      cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
+    }, app);
+
+    httpsServer.listen(3443, () => console.log('Server open on port 3443'));
+
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-app.get('/movies/:name', (req, res) => {
-  const movieName = req.params.name;
-  const filePath = path.join(dataDirectory, `${movieName}.json`);
-
-  if (fs.existsSync(filePath)) {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) {
-        return res.status(500).json({ error: 'Internal server error' });
-      }
-      res.json(JSON.parse(data));
-    });
-  } else {
-    res.status(404).json({ error: 'Movie not found' });
-  }
-});
-
-app.get('/movies', (req, res) => {
-  fs.readdir(dataDirectory, (err, fileNames) => {
-    if (err) {
-        console.error('Error reading directory:', err);
-        return res.status(500).send('Internal Server Error');
-    }
-
-    const fileNamesWithoutExtensions = fileNames.map(fileName => {
-        return path.parse(fileName).name;
-    });
-
-    res.json(fileNamesWithoutExtensions);
-});
-})
-
-app.post('/movies', (req, res) => {
-  console.log(req)
-  const { name, description, rating, youtubeId, source, imageData } = req.body;
-  if (!name || !rating || !imageData) {
-    return res.status(400).json({ error: 'Name, rating, and imageData are required' });
-  }
-
-  const filePath = path.join(dataDirectory, `${name}.json`);
-  const movieData = { name, rating, description, youtubeId, source, imageData };
-
-  fs.writeFile(filePath, JSON.stringify(movieData), (err) => {
-    if (err) {
-      return res.status(500).json({ error: 'Failed to save movie data' });
-    }
-    res.status(201).json({ message: 'Movie data saved successfully' });
-  });
-});
-
-const httpsServer = https.createServer({
-  key: fs.readFileSync(path.join(__dirname, 'cert', 'cert-key.pem')),
-  cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
-},app);
-
-httpsServer.listen(3443, () => console.log('open on port 3443'));
+run().catch(console.error);
