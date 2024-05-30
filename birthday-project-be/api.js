@@ -7,6 +7,7 @@ const { MongoClient } = require('mongodb');
 // MongoDB connection URI and database name
 const mongoURI = 'mongodb+srv://noampeer23:noam23012004@shir-mongo.2gsqx2i.mongodb.net/?retryWrites=true&w=majority&appName=shir-mongo';
 const dbName = 'Movie-Information';
+const port = process.env.PORT || 4000;
 
 // Initialize Express app
 const app = express();
@@ -82,8 +83,9 @@ async function run() {
       }
     });
     
-    const server = http.createServer(app)
-    server.listen(5000, () => console.log('Server open on port 5000'));
+    app.listen(port, () => {
+      console.log(`Example app listening on port ${port}`)
+    })
 
   } catch (err) {
     console.error(err);
