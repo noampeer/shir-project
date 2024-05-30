@@ -1,7 +1,7 @@
 .description {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px; /* Adjusted font size for better readability */
-  max-width: 70%; /* Increased max-width for better text wrapping */
+  max-width: 500px; /* Increased max-width for better text wrapping */
   word-wrap: break-word;
   text-align: center; /* Center text for better presentation */
   margin-bottom: 20px; /* Add spacing at the bottom */
