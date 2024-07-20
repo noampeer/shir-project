@@ -15,6 +15,8 @@ const app = express();
 app.use(bodyParser.json({ limit: '20mb' }));
 
 const allowedOrigins = ['https://shir-project.vercel.app'];
+const renderAppName = 'https://shir-project.onrender.com'
+
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -28,6 +30,22 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 200
 };
+
+function reloadSite() {
+  fetch(renderAppName + '/movies')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('reloaded_server');
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+}
 
 app.use(cors(corsOptions));
 
@@ -86,6 +104,8 @@ async function run() {
     app.listen(port, () => {
       console.log(`Example app listening on port ${port}`)
     })
+
+    setInterval(reloadSite, 30000)
 
   } catch (err) {
     console.error(err);
